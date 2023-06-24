@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('statistics', function (Blueprint $table) {
+            $table->id();
+            $table -> text('text');
+            $table -> string('count1_txt');
+            $table -> decimal('count1_value');
+            $table -> string('count2_txt');
+            $table -> decimal('count2_value');
+            $table -> string('count3_txt');
+            $table -> decimal('count3_value');
+            $table -> string('count4_txt');
+            $table -> decimal('count4_value');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('statistics');
+    }
+};

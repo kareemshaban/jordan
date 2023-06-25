@@ -47,7 +47,7 @@
                         <div class="row" style="align-items: end;">
                             <div class="col-6">
                                 <div class="form-group">
-
+                                    <input type="hidden" name="id" id="id">
                                     <label>Blog Title</label>
                                     <input class="form-control" name="title" id="title" placeholder="title Text">
                                 </div>
@@ -64,7 +64,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label> Blog Details</label>
-                                    <textarea id="details" name="details" rows="4" style="width: 100%"></textarea>
+                                    <textarea id="details" name="details" rows="12" style="width: 100%"></textarea>
                                 </div>
                             </div>
 
@@ -75,7 +75,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="custom-file">
-                                        <input type="file" class="form-control" id="img"   name="img"  accept="image/png, image/jpeg" required>
+                                        <input type="file" class="form-control" id="img"   name="img"  accept="image/png, image/jpeg" >
                                         <label class="custom-file-label" for="img1" id="path1">Slide Image   <span style="color:red;">*</span></label>
                                     </div>
 
@@ -133,8 +133,11 @@
                                     <td class="text-center" style="vertical-align: middle;">
                                         <a href="{{route('deleteBlog' , $blog -> id)}}">
                                             <button class="btn btn-danger" > <i class="fa fa-trash"></i> Delete  </button>
-                                        </a>
 
+                                        </a>
+                                        <br>
+                                        <br>
+                                        <button class="btn btn-info btnEdit" value="{{$blog -> id}}"> <i class="fa fa-pencil"></i> Edit  </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -151,6 +154,45 @@
             $("#zero_config").DataTable();
         </script>
         <script type="text/javascript">
+
+            $(document).ready(function (){
+
+                document.getElementById('id').value = 0;
+                document.getElementById('title').value = '' ;
+                document.getElementById('short_details').value = '' ;
+                document.getElementById('details').innerHTML = '' ;
+                var img = '../assets/images/blog_holder.jpg';
+                $("#img1-tag").attr('src', img);
+
+                $(document).on('click' , '.btnEdit' , function (){
+
+                    const id = this.value ;
+                    console.log(id);
+                    $.ajax({
+                        type: 'get',
+                        url: 'getBlogData' + '/' + id,
+                        dataType: 'json',
+
+                        success: function (response) {
+                            document.getElementById('id').value = response.id ;
+                            document.getElementById('title').value = response.title ;
+                            document.getElementById('short_details').value = response.short_details ;
+                            document.getElementById('details').innerHTML = response.details ;
+
+
+                            var img = '../images/Blogs/' + response.img;
+                            $("#img1-tag").attr('src', img);
+
+
+
+                        }
+                    });
+
+                });
+
+
+            });
+
             function readURL(input , i) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();

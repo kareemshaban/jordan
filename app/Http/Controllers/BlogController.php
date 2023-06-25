@@ -35,31 +35,61 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required',
-            'short_details' => 'required',
-            'details' => 'required',
-            'img' => 'required'
-        ]);
 
-        $imageName = time()  . '.' . $request->img->extension();
-        $request->img->move(('images/Blogs'), $imageName);
+        if ($request -> id == 0){
+            $validated = $request->validate([
+                'title' => 'required',
+                'short_details' => 'required',
+                'details' => 'required',
+                'img' => 'required'
+            ]);
 
-        Blog::create([
-            'title' =>  $request -> title,
-            'short_details' => $request -> short_details,
-            'details' => $request -> details,
-            'img' => $imageName
-        ]);
+            $imageName = time()  . '.' . $request->img->extension();
+            $request->img->move(('images/Blogs'), $imageName);
+
+            Blog::create([
+                'title' =>  $request -> title,
+                'short_details' => $request -> short_details,
+                'details' => $request -> details,
+                'img' => $imageName
+            ]);
+        } else {
+            $validated = $request->validate([
+                'title' => 'required',
+                'short_details' => 'required',
+                'details' => 'required',
+            ]);
+            $blog = Blog::find($request -> id);
+           if($blog){
+               if($request -> img){
+                   $imageName = time()  . '.' . $request->img->extension();
+                   $request->img->move(('images/Blogs'), $imageName);
+               } else {
+                   $imageName = $blog ->  img;
+               }
+
+               $blog -> update([
+                   'title' =>  $request -> title,
+                   'short_details' => $request -> short_details,
+                   'details' => $request -> details,
+                   'img' => $imageName
+               ]);
+
+           }
+
+        }
+
         return redirect() -> route('blogs');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show($id)
     {
-        //
+        $blog = Blog::find($id);
+        echo json_encode($blog);
+        exit();
     }
 
     /**

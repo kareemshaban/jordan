@@ -37,21 +37,53 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'slideText' => 'required',
-            'btnText' => 'required',
-            'img' => 'required'
-        ]);
 
-        $imageName = time() . '.' . $request->img->extension();
-        $request->img->move(('images/Slides'), $imageName);
-        Slide::create([
-            'slideText' => $request -> slideText,
-            'btnText' => $request -> btnText,
-            'inUrl' => $request -> inUrl,
-            'exUrl' => $request -> exUrl,
-            'img' => $imageName
-        ]);
+
+        if($request -> id == 0){
+            $validated = $request->validate([
+                'slideText' => 'required',
+                'btnText' => 'required',
+                'img' => 'required'
+            ]);
+            $imageName = time() . '.' . $request->img->extension();
+            $request->img->move(('images/Slides'), $imageName);
+            Slide::create([
+                'slideText' => $request -> slideText,
+                'btnText' => $request -> btnText,
+                'inUrl' => $request -> inUrl,
+                'exUrl' => $request -> exUrl,
+                'img' => $imageName
+            ]);
+        } else {
+            $validated = $request->validate([
+                'slideText' => 'required',
+                'btnText' => 'required',
+
+            ]);
+            $slide = Slide::find($request -> id);
+            if($slide ){
+                if($request -> img){
+                    $imageName = time() . '.' . $request->img->extension();
+                    $request->img->move(('images/Slides'), $imageName);
+                } else {
+                    $imageName = $slide ->  img;
+                }
+
+
+                $slide -> update([
+                    'slideText' => $request -> slideText,
+                    'btnText' => $request -> btnText,
+                    'inUrl' => $request -> inUrl,
+                    'exUrl' => $request -> exUrl,
+                    'img' => $imageName
+                ]);
+
+            }
+
+
+        }
+
+
 
         return redirect() -> route('slider') ;
     }
@@ -59,9 +91,11 @@ class SlideController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Slide $slide)
+    public function show($id)
     {
-        //
+        $slide = Slide::find($id);
+        echo json_encode($slide);
+        exit();
     }
 
     /**

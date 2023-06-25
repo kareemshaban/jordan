@@ -47,10 +47,10 @@
                         <div class="row" style="align-items: end;">
                             <div class="col-8">
                                 <div class="form-group">
-
+                                      <input type="hidden" name="id" id="id">
                                     <label><strong>Slide Text</strong></label>
 
-                                    <textarea class="wysihtml5 form-control" name="slideText" placeholder="Enter Slide Text"></textarea>
+                                    <textarea class="wysihtml5 form-control" name="slideText" id="slideText" placeholder="Enter Slide Text" rows="12"></textarea>
 
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="custom-file">
-                                        <input type="file" class="form-control" id="img"   name="img"  accept="image/png, image/jpeg" required>
+                                        <input type="file" class="form-control" id="img"   name="img"  accept="image/png, image/jpeg" >
                                         <label class="custom-file-label" for="img1" id="path1">Slide Image   <span style="color:red;">*</span></label>
                                     </div>
 
@@ -159,7 +159,9 @@
                                         <a href="{{route('deleteSlide' , $slide -> id)}}">
                                             <button class="btn btn-danger" > <i class="fa fa-trash"></i> Delete  </button>
                                         </a>
-
+                                        <br>
+                                        <br>
+                                        <button class="btn btn-info btnEdit" value="{{$slide -> id}}"> <i class="fa fa-pencil"></i> Edit  </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -176,6 +178,44 @@
             $("#zero_config").DataTable();
         </script>
         <script type="text/javascript">
+            $(document).ready(function (){
+
+                document.getElementById('id').value = 0;
+                document.getElementById('btnText').value = '' ;
+                document.getElementById('inUrl').value = '' ;
+                document.getElementById('exUrl').value = '' ;
+
+                $('iframe').contents().find('.wysihtml5-editor').html('');
+
+               $(document).on('click' , '.btnEdit' , function (){
+                   const id = this.value ;
+                   $.ajax({
+                       type: 'get',
+                       url: 'getSlide' + '/' + id,
+                       dataType: 'json',
+
+                       success: function (response) {
+                         document.getElementById('id').value = response.id ;
+                         document.getElementById('btnText').value = response.btnText ;
+                           document.getElementById('inUrl').value = response.inUrl ;
+                           document.getElementById('exUrl').value = response.exUrl ;
+
+                           $('iframe').contents().find('.wysihtml5-editor').html(response.slideText);
+
+                           var img = '../images/Slides/' + response.img;
+                           $("#img1-tag").attr('src', img);
+
+
+
+                       }
+                   });
+
+               });
+
+
+            });
+
+
             function readURL(input , i) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -191,6 +231,9 @@
             $("#img").change(function(){
                 readURL(this);
             });
+
+
+
         </script>
     </div>
 </div>

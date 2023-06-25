@@ -64,7 +64,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label> Member Details</label>
-                                    <textarea id="description" name="description" rows="4" style="width: 100%"></textarea>
+                                    <textarea id="description" name="description" rows="12" style="width: 100%"></textarea>
                                 </div>
                             </div>
 

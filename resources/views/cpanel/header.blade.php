@@ -152,7 +152,7 @@
 
                                     <label><strong>Callback Text</strong></label>
 
-                                    <textarea class="wysihtml5 form-control" name="callback_text" placeholder="Enter Callback Text">{!! $header != null ? $header ->  callback_text : ''!!}</textarea>
+                                    <textarea class="wysihtml5 form-control" name="callback_text" placeholder="Enter Callback Text" rows="12">{!! $header != null ? $header ->  callback_text : ''!!}</textarea>
 
                                 </div>
                             </div>

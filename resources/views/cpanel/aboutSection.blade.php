@@ -60,7 +60,7 @@
                                 <div class="form-group">
 
                                     <label>Section Details</label>
-                                  <textarea class="form-control-lg" id="details" name="details" rows="4" style="width: 100%">{{$data != null ? $data -> details : ''}}</textarea>
+                                  <textarea class="form-control-lg" id="details" name="details" rows="12" style="width: 100%">{{$data != null ? $data -> details : ''}}</textarea>
 
                                 </div>
                             </div>

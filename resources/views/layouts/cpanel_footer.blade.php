@@ -21,7 +21,6 @@
 <script src="{{asset('assets/libs/flot/jquery.flot.stack.js')}}"></script>
 <script src="{{asset('assets/libs/flot/jquery.flot.crosshair.js')}}"></script>
 <script src="{{asset('assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
-<script src="{{asset('assets/dist/js/pages/chart/chart-page-init.js')}}"></script>
 
 <script src="{{asset('assets/extra-libs/DataTables/datatables.min.js')}}"></script>
 <script type="text/javascript">

@@ -26,6 +26,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/slider', [App\Http\Controllers\SlideController::class, 'index'])->name('slider');
 Route::post('/storeSliderData', [App\Http\Controllers\SlideController::class, 'store'])->name('storeSliderData');
 Route::get('/deleteSlide/{id}', [App\Http\Controllers\SlideController::class, 'destroy'])->name('deleteSlide');
+Route::get('/getSlide/{id}', [App\Http\Controllers\SlideController::class, 'show'])->name('getSlide');
+
 
 Route::get('/header', [App\Http\Controllers\HeaderController::class, 'index'])->name('header');
 Route::post('/storeheaderData', [App\Http\Controllers\HeaderController::class, 'store'])->name('storeheaderData');
@@ -36,6 +38,7 @@ Route::post('/storeBlogSectionData', [App\Http\Controllers\BlogSectionController
 Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('blogs');
 Route::post('/storeBlog', [App\Http\Controllers\BlogController::class, 'store'])->name('storeBlog');
 Route::get('/deleteBlog/{id}', [App\Http\Controllers\BlogController::class, 'destroy'])->name('deleteBlog');
+Route::get('/getBlogData/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('getBlogData');
 
 
 Route::get('/getBlog/{id}', [App\Http\Controllers\FrontController::class, 'getBlog'])->name('getBlog');

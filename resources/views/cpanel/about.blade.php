@@ -50,7 +50,7 @@
 
                                     <label><strong>Statistics Text</strong></label>
 
-                                    <textarea class="wysihtml5 form-control" name="section_txt" placeholder="Enter Statistics Text" rows="4">@if($data){!! $data -> section_txt !!} @endif </textarea>
+                                    <textarea class="wysihtml5 form-control" name="section_txt" placeholder="Enter Statistics Text" rows="12">@if($data){!! $data -> section_txt !!} @endif </textarea>
 
                                 </div>
                             </div>

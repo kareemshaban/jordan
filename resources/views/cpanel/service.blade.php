@@ -59,7 +59,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label> Service Details</label>
-                                    <textarea id="details" name="details" rows="4" style="width: 100%"></textarea>
+                                    <textarea id="details" name="details" rows="12" style="width: 100%"></textarea>
                                 </div>
                             </div>
 
